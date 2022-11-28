@@ -3,6 +3,7 @@ import pandas as pd
 import csv
 import mysql.connector as mysql
 from mysql.connector import Error
+import mainWindow
 
 '''
 tmdb_5000_movies.csv was used as a .csv file from which the information was taken to create the DB
@@ -204,6 +205,9 @@ Verifies that the data was successfully inserted into the table
 # # closing the database connection
 # connection.close()
 
+
+# Running Window
+mainWindow.win.mainloop()
 
 
 
