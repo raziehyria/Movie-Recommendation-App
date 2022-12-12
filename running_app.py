@@ -44,26 +44,12 @@ class MovieReccApp:
         genre4 = ttk.Radiobutton(tab1, text="Thriller", value="thriller", variable=self.genre,
                                  command=self.buttonEnabler)
         genre5 = ttk.Radiobutton(tab1, text="Horror", value="horror", variable=self.genre, command=self.buttonEnabler)
-        genre6 = ttk.Radiobutton(tab1, text="Adventure", value="adventure", variable=self.genre, command=self.buttonEnabler)
-        genre7 = ttk.Radiobutton(tab1, text="Animation", value="animation", variable=self.genre,command=self.buttonEnabler)
-        genre8 = ttk.Radiobutton(tab1, text="Crime", value="crime", variable=self.genre,command=self.buttonEnabler)
-        genre9 = ttk.Radiobutton(tab1, text="Documentary", value="documentary", variable=self.genre, command=self.buttonEnabler)
-        genre10 = ttk.Radiobutton(tab1, text="Drama", value="drama", variable=self.genre, command=self.buttonEnabler)
-        genre11 = ttk.Radiobutton(tab1, text="Family", value="family", variable=self.genre, command=self.buttonEnabler)
-        genre12 = ttk.Radiobutton(tab1, text="Fantasy", value="fantasy", variable=self.genre, command=self.buttonEnabler)
-        genre13 = ttk.Radiobutton(tab1, text="Foreign", value="foreign", variable=self.genre, command=self.buttonEnabler)
-        genre14 = ttk.Radiobutton(tab1, text="History", value="history", variable=self.genre, command=self.buttonEnabler)
-        genre15 = ttk.Radiobutton(tab1, text="Music", value="music", variable=self.genre, command=self.buttonEnabler)
-        genre16 = ttk.Radiobutton(tab1, text="Mystery", value="mystery", variable=self.genre, command=self.buttonEnabler)
-        genre17 = ttk.Radiobutton(tab1, text="TVMovie", value="tvmovie", variable=self.genre, command=self.buttonEnabler)
-        genre18 = ttk.Radiobutton(tab1, text="War", value="war", variable=self.genre, command=self.buttonEnabler)
-        genre19 = ttk.Radiobutton(tab1, text="Western", value="western", variable=self.genre, command=self.buttonEnabler)
-
+        genre6 = ttk.Radiobutton(tab1, text="Romance", value="romance", variable=self.genre, command=self.buttonEnabler)
+        genre7 = ttk.Radiobutton(tab1, text="Drama", value="drama", variable=self.genre, command=self.buttonEnabler)
 
         # Adding the radio buttons to the tab
-        genres = [genre1, genre2, genre3, genre4, genre5,genre6,genre7,genre8,genre9,genre10,genre11,genre12,genre13,genre14,genre15,genre16,genre17,genre18,genre19]
-        
-        for each in range(0, 5):
+        genres = [genre1, genre2, genre3, genre4, genre5, genre6, genre7]
+        for each in range(0, 7):
             genres[each].grid(row=each + 2, column=0, sticky="w")
 
         genreDescription.grid(row=0, column=0, columnspan=3, pady=(10, 5), sticky="n")
@@ -76,14 +62,16 @@ class MovieReccApp:
 
         self.rating = IntVar()
 
-        rating1 = ttk.Radiobutton(tab2, text="1 Star", value=1, variable=self.rating, command=self.buttonEnabler)
-        rating2 = ttk.Radiobutton(tab2, text="2 Stars", value=2, variable=self.rating, command=self.buttonEnabler)
-        rating3 = ttk.Radiobutton(tab2, text="3 Stars", value=3, variable=self.rating, command=self.buttonEnabler)
-        rating4 = ttk.Radiobutton(tab2, text="4 Stars", value=4, variable=self.rating, command=self.buttonEnabler)
-        rating5 = ttk.Radiobutton(tab2, text="5 Stars", value=5, variable=self.rating, command=self.buttonEnabler)
+        rating1 = ttk.Radiobutton(tab2, text="3-4 Stars", value=3, variable=self.rating, command=self.buttonEnabler)
+        rating2 = ttk.Radiobutton(tab2, text="4-5 Stars", value=4, variable=self.rating, command=self.buttonEnabler)
+        rating3 = ttk.Radiobutton(tab2, text="5-6 Stars", value=5, variable=self.rating, command=self.buttonEnabler)
+        rating4 = ttk.Radiobutton(tab2, text="6-7 Stars", value=6, variable=self.rating, command=self.buttonEnabler)
+        rating5 = ttk.Radiobutton(tab2, text="7-8 Stars", value=7, variable=self.rating, command=self.buttonEnabler)
+        rating6 = ttk.Radiobutton(tab2, text="8-9 Stars", value=8, variable=self.rating, command=self.buttonEnabler)
+        rating7 = ttk.Radiobutton(tab2, text="9-10 Stars", value=9, variable=self.rating, command=self.buttonEnabler)
 
-        ratings = [rating1, rating2, rating3, rating4, rating5]
-        for each in range(0, 5):
+        ratings = [rating1, rating2, rating3, rating4, rating5, rating6, rating7]
+        for each in range(0, 7):
             ratings[each].grid(row=each + 2, column=0, sticky="w")
 
         ratingDescription.grid(row=0, column=0, columnspan=3, pady=(10, 5), sticky="n")
@@ -97,12 +85,16 @@ class MovieReccApp:
 
         self.year = IntVar()
 
-        yearGroup1 = ttk.Radiobutton(tab3, text="2020 and beyond", value=5, variable=self.year,
+        yearGroup1 = ttk.Radiobutton(tab3, text="2020 and beyond", value=2020, variable=self.year,
                                      command=self.buttonEnabler)
-        yearGroup2 = ttk.Radiobutton(tab3, text="2017 - 2019", value=4, variable=self.year, command=self.buttonEnabler)
-        yearGroup3 = ttk.Radiobutton(tab3, text="2015 - 2017", value=3, variable=self.year, command=self.buttonEnabler)
-        yearGroup4 = ttk.Radiobutton(tab3, text="2010 - 2015", value=2, variable=self.year, command=self.buttonEnabler)
-        yearGroup5 = ttk.Radiobutton(tab3, text="Before 2010", value=1, variable=self.year, command=self.buttonEnabler)
+        yearGroup2 = ttk.Radiobutton(tab3, text="2017 - 2019", value=2017, variable=self.year,
+                                     command=self.buttonEnabler)
+        yearGroup3 = ttk.Radiobutton(tab3, text="2015 - 2017", value=2015, variable=self.year,
+                                     command=self.buttonEnabler)
+        yearGroup4 = ttk.Radiobutton(tab3, text="2010 - 2015", value=2010, variable=self.year,
+                                     command=self.buttonEnabler)
+        yearGroup5 = ttk.Radiobutton(tab3, text="Before 2010", value=2009, variable=self.year,
+                                     command=self.buttonEnabler)
 
         years = [yearGroup1, yearGroup2, yearGroup3, yearGroup4, yearGroup5]
         for each in range(0, 5):
@@ -114,7 +106,7 @@ class MovieReccApp:
 
         # INCLUDED COMMAND = TO TIE BUTTON to running app window
         self.submitButton = ttk.Button(self.win, text="Submit Filters", state="disabled",
-                                       command=self.submit_button_pressed())
+                                       command=self.submit_button_pressed)
 
         self.submitButton.grid(row=1, column=2, padx=10, pady=(0, 10), sticky="e")
 
@@ -123,11 +115,31 @@ class MovieReccApp:
             self.submitButton.config(state="normal")
             self.submit_button_clicked = True  # once all choices are selected, status of button click changed to true
 
+    def createPopup(self, movieList=[]):
+        # Creating toplevel window
+        reccs = Toplevel(self.win)
+        reccs.geometry("300x200")
+        reccs.minsize(300, 200)
+        reccs.title("Recommendations")
+        tkinter.Tk.grid_rowconfigure(reccs, 0, weight=1)
+        tkinter.Tk.grid_columnconfigure(reccs, (0, 1), weight=1)
+
+        # Heading label
+        reccsLabel = ttk.Label(reccs, text="Here are some movie recommendations:")
+        reccsLabel.grid(row=0, column=0, columnspan=2, padx=5, pady=5)
+
+        # Button to close the window
+        exitButton = ttk.Button(reccs, text="OK", command=reccs.destroy)
+        exitButton.grid(row=6, column=1, padx=5, pady=5, sticky="e")
+
+        # Forces popup focus
+        reccs.grab_set()
+
     def submit_button_pressed(self, event=None):
         # if the button is clicked, get the value of each option and put it into list
         if self.submit_button_clicked:
             filters = [self.year.get(), self.rating.get(), self.genre.get()]
-            pass
+            self.createPopup()
             # access tree and store into child nodes
             # or send to the the database for search
             # will remove once logic implemented: used to avoid errors
