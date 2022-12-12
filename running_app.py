@@ -44,9 +44,25 @@ class MovieReccApp:
         genre4 = ttk.Radiobutton(tab1, text="Thriller", value="thriller", variable=self.genre,
                                  command=self.buttonEnabler)
         genre5 = ttk.Radiobutton(tab1, text="Horror", value="horror", variable=self.genre, command=self.buttonEnabler)
+        genre6 = ttk.Radiobutton(tab1, text="Adventure", value="adventure", variable=self.genre, command=self.buttonEnabler)
+        genre7 = ttk.Radiobutton(tab1, text="Animation", value="animation", variable=self.genre,command=self.buttonEnabler)
+        genre8 = ttk.Radiobutton(tab1, text="Crime", value="crime", variable=self.genre,command=self.buttonEnabler)
+        genre9 = ttk.Radiobutton(tab1, text="Documentary", value="documentary", variable=self.genre, command=self.buttonEnabler)
+        genre10 = ttk.Radiobutton(tab1, text="Drama", value="drama", variable=self.genre, command=self.buttonEnabler)
+        genre11 = ttk.Radiobutton(tab1, text="Family", value="family", variable=self.genre, command=self.buttonEnabler)
+        genre12 = ttk.Radiobutton(tab1, text="Fantasy", value="fantasy", variable=self.genre, command=self.buttonEnabler)
+        genre13 = ttk.Radiobutton(tab1, text="Foreign", value="foreign", variable=self.genre, command=self.buttonEnabler)
+        genre14 = ttk.Radiobutton(tab1, text="History", value="history", variable=self.genre, command=self.buttonEnabler)
+        genre15 = ttk.Radiobutton(tab1, text="Music", value="music", variable=self.genre, command=self.buttonEnabler)
+        genre16 = ttk.Radiobutton(tab1, text="Mystery", value="mystery", variable=self.genre, command=self.buttonEnabler)
+        genre17 = ttk.Radiobutton(tab1, text="TVMovie", value="tvmovie", variable=self.genre, command=self.buttonEnabler)
+        genre18 = ttk.Radiobutton(tab1, text="War", value="war", variable=self.genre, command=self.buttonEnabler)
+        genre19 = ttk.Radiobutton(tab1, text="Western", value="western", variable=self.genre, command=self.buttonEnabler)
+
 
         # Adding the radio buttons to the tab
-        genres = [genre1, genre2, genre3, genre4, genre5]
+        genres = [genre1, genre2, genre3, genre4, genre5,genre6,genre7,genre8,genre9,genre10,genre11,genre12,genre13,genre14,genre15,genre16,genre17,genre18,genre19]
+        
         for each in range(0, 5):
             genres[each].grid(row=each + 2, column=0, sticky="w")
 
