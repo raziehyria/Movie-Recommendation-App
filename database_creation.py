@@ -5,7 +5,7 @@ import mysql.connector as mysql
 from mysql.connector import Error
 
 
-moviedata = pd.read_csv('/Users/besjana/PyCharm/dataset/462_FinalProject_MovieRecc/dataset.csv', index_col=False, delimiter=',', quotechar='"',quoting=csv.QUOTE_ALL)
+moviedata = pd.read_csv('dataset.csv', index_col=False, delimiter=',', quotechar='"',quoting=csv.QUOTE_ALL)
 
 # creates connection to the machine and creates there a Database called movie_rec
 try:

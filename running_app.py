@@ -2,6 +2,8 @@ import tkinter
 from tkinter import *
 from tkinter import ttk
 from dbQuery import Query
+import datetime
+import random
 
 # import main
 
@@ -12,6 +14,8 @@ class MovieReccApp:
     def __init__(self):
         
         self.query = Query()
+        # Getting current year
+        self.currentYear = int(datetime.date.today().year)
         
         # Creating main window
         self.win = tkinter.Tk()
@@ -89,6 +93,9 @@ class MovieReccApp:
 
         self.year = IntVar()
 
+        # For use when the year radio buttons are selected. AKA Upper bound
+        self.upperYear = 0
+
         yearGroup1 = ttk.Radiobutton(tab3, text="2020 and beyond", value=2020, variable=self.year,
                                      command=self.buttonEnabler)
         yearGroup2 = ttk.Radiobutton(tab3, text="2017 - 2019", value=2017, variable=self.year,
@@ -97,7 +104,7 @@ class MovieReccApp:
                                      command=self.buttonEnabler)
         yearGroup4 = ttk.Radiobutton(tab3, text="2010 - 2015", value=2010, variable=self.year,
                                      command=self.buttonEnabler)
-        yearGroup5 = ttk.Radiobutton(tab3, text="Before 2010", value=2009, variable=self.year,
+        yearGroup5 = ttk.Radiobutton(tab3, text="Before 2010", value=1930, variable=self.year,
                                      command=self.buttonEnabler)
 
         years = [yearGroup1, yearGroup2, yearGroup3, yearGroup4, yearGroup5]
@@ -119,19 +126,88 @@ class MovieReccApp:
             self.submitButton.config(state="normal")
             self.submit_button_clicked = True  # once all choices are selected, status of button click changed to true
 
+        # Getting the upper bound of the years, runs when a radio button is selected.
+        # Would have used case-switch, but doesn't exist in python
+        if int(self.year.get()) == 2020:
+            self.upperYear = self.currentYear
+        elif int(self.year.get()) == 2017:
+            self.upperYear = 2019
+        elif int(self.year.get()) == 2015:
+            self.upperYear = 2017
+        elif int(self.year.get()) == 2010:
+            self.upperYear = 2015
+        elif int(self.year.get()) == 1930:
+            self.upperYear = 2010
+        else:
+            self.upperYear = 0
+
     def createPopup(self, movieList=[]):
         # Creating toplevel window
         reccs = Toplevel(self.win)
-        reccs.geometry("300x200")
-        reccs.minsize(300, 200)
+        reccs.geometry("350x250")
+        reccs.minsize(350, 250)
         reccs.title("Recommendations")
-        tkinter.Tk.grid_rowconfigure(reccs, 0, weight=1)
+        tkinter.Tk.grid_rowconfigure(reccs, (0, 1, 2, 3, 4, 5, 6), weight=1)
         tkinter.Tk.grid_columnconfigure(reccs, (0, 1), weight=1)
+
+        # Define limit variables. If you want more recommendations, change the limit and add more labels.
+        limit = 5
+        labelsToDisplay = []
+
+        try:
+            count = 0
+            while count < limit and movieList:
+                # Randomly selects from our results to store up to 5 movies to display
+                choice = random.choice(movieList)
+                movieList.remove(choice)
+                labelsToDisplay.append(choice)
+                count += 1
+        # If there are less than 5 entries
+        except IndexError:
+            # Ignores and moves on
+            pass
 
         # Heading label
         reccsLabel = ttk.Label(reccs, text="Here are some movie recommendations:")
-        movieLabel = ttk.Label(reccs, text=self.movieRecs)
-        reccsLabel.grid(row=0, column=0, columnspan=2, padx=5, pady=5)
+
+        # Limited to 5 movies to show.
+        movieLabel1 = ttk.Label(reccs)
+        movieLabel2 = ttk.Label(reccs)
+        movieLabel3 = ttk.Label(reccs)
+        movieLabel4 = ttk.Label(reccs)
+        movieLabel5 = ttk.Label(reccs)
+
+        # Added year in mind of remakes/reboots
+        movieYear1 = ttk.Label(reccs)
+        movieYear2 = ttk.Label(reccs)
+        movieYear3 = ttk.Label(reccs)
+        movieYear4 = ttk.Label(reccs)
+        movieYear5 = ttk.Label(reccs)
+
+        # Grouping labels for easy iteration later
+        movieLabels = [movieLabel1, movieLabel2, movieLabel3, movieLabel4, movieLabel5]
+        movieYears = [movieYear1, movieYear2, movieYear3, movieYear4, movieYear5]
+
+        try:
+            if not labelsToDisplay:
+                # Lets user know that there weren't any movies meeting their criteria
+                errorLabel = ttk.Label(reccs, text="Sorry, we found no movies with your filters.\nTry other filters?")
+                errorLabel.grid(row=0, column=0, columnspan=2, padx=5, pady=5)
+            count = 0
+            while count < limit:
+                # Sets labels to associated movie and year
+                movieLabels[count].configure(text=labelsToDisplay[count][0])
+                movieYears[count].configure(text="("+str(labelsToDisplay[count][1])+")")
+                movieLabels[count].grid(row=count+1, column=0, padx=5, pady=5, sticky="e")
+                movieYears[count].grid(row=count+1, column=1, padx=5, pady=5, sticky="w")
+                count += 1
+        # If there are less than 5 movies
+        except IndexError:
+            pass
+
+        # If there are movies that we can display, display the heading, otherwise the error will show
+        if labelsToDisplay:
+            reccsLabel.grid(row=0, column=0, columnspan=2, padx=5, pady=5)
 
         # Button to close the window
         exitButton = ttk.Button(reccs, text="OK", command=reccs.destroy)
@@ -144,14 +220,15 @@ class MovieReccApp:
         # if the button is clicked, get the value of each option and put it into list
         if self.submit_button_clicked:
             filters = [self.year.get(), self.rating.get(), self.genre.get()]
-            user_year = self.year.get()
-            user_rating = self.rating.get()
+            user_year = int(self.year.get())
+            user_rating = int(self.rating.get())
             user_genre = self.genre.get()
+            year_limit = self.upperYear
             
-            self.movieRecs = self.query.query_search(user_genre, user_year, user_rating)
+            self.movieRecs = self.query.query_search(user_genre, user_year, year_limit, user_rating)
             
 
-            self.createPopup()
+            self.createPopup(self.movieRecs)
             
             
     
