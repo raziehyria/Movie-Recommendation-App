@@ -1,14 +1,18 @@
 import tkinter
 from tkinter import *
 from tkinter import ttk
-
+from dbQuery import Query
 
 # import main
 
 
+
+
 class MovieReccApp:
     def __init__(self):
-
+        
+        self.query = Query()
+        
         # Creating main window
         self.win = tkinter.Tk()
         self.win.geometry("400x300")
@@ -126,6 +130,7 @@ class MovieReccApp:
 
         # Heading label
         reccsLabel = ttk.Label(reccs, text="Here are some movie recommendations:")
+        movieLabel = ttk.Label(reccs, text=self.movieRecs)
         reccsLabel.grid(row=0, column=0, columnspan=2, padx=5, pady=5)
 
         # Button to close the window
@@ -139,12 +144,17 @@ class MovieReccApp:
         # if the button is clicked, get the value of each option and put it into list
         if self.submit_button_clicked:
             filters = [self.year.get(), self.rating.get(), self.genre.get()]
-            self.createPopup()
-            # access tree and store into child nodes
-            # or send to the the database for search
-            # will remove once logic implemented: used to avoid errors
+            user_year = self.year.get()
+            user_rating = self.rating.get()
+            user_genre = self.genre.get()
+            
+            self.movieRecs = self.query.query_search(user_genre, user_year, user_rating)
+            
 
-    # run function to catch mouse scroll error and be called on by main
+            self.createPopup()
+            
+            
+    
     def run(self):
         try:
             # Running Window

@@ -10,9 +10,9 @@ moviedata = pd.read_csv('/Users/besjana/PyCharm/dataset/462_FinalProject_MovieRe
 # creates connection to the machine and creates there a Database called movie_rec
 try:
     mydb = mysql.connect(
-        host="philadelphiakubicu.tplinkdns.com",
-        username="besa",
-        password="pikachu",   
+        host="localhost",
+        username="root",
+        password="",  
     )
     if mydb.is_connected():
         create_db_query = "CREATE DATABASE movie_rec"
@@ -24,9 +24,9 @@ except Error as e:
 # connects to the movie_rec db created above and creates a new table
 try:
     mydb = mysql.connect(
-        host="philadelphiakubicu.tplinkdns.com",
-        username="besa",
-        password="pikachu",
+        host="localhost",
+        username="root",
+        password="",
         database="movie_rec"
     )
     if mydb.is_connected():
@@ -53,9 +53,25 @@ try:
             print("Record inserted")
             # the connection is not auto committed by default, so we must commit to save the changes
             mydb.commit()
+
+        select_movies_query = """
+                        SELECT genres,plot,release_date,ratings,title
+                        FROM movies
+                        WHERE genres = "Action" 
+                        AND release_date= 2013 
+                        AND ratings > 7 AND ratings < 8
+                         """
+
+        mycursor.execute(select_movies_query)
+        print('selecting.....')
+        print('selection is made....')
+        for movie in mycursor.fetchall():
+            print(movie)
+            # the connection is not auto committed by default, so we must commit to save the changes
+            mydb.commit()
 except Error as e:
     print("Error while connecting to MySQL", e)
 
 
 # closing the database connection
-# connection.close()
+# mydb.close()
