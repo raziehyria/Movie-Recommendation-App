@@ -5,15 +5,14 @@ import mysql.connector as mysql
 from mysql.connector import Error
 
 
-moviedata = pd.read_csv('./dataset.csv', index_col=False, delimiter=',', quotechar='"',quoting=csv.QUOTE_ALL)
+moviedata = pd.read_csv('/Users/besjana/PyCharm/dataset/462_FinalProject_MovieRecc/dataset.csv', index_col=False, delimiter=',', quotechar='"',quoting=csv.QUOTE_ALL)
 
 # creates connection to the machine and creates there a Database called movie_rec
 try:
     mydb = mysql.connect(
-        host="localhost",
-        username="root",
-        password="",
-        
+        host="philadelphiakubicu.tplinkdns.com",
+        username="besa",
+        password="pikachu",   
     )
     if mydb.is_connected():
         create_db_query = "CREATE DATABASE movie_rec"
@@ -25,9 +24,9 @@ except Error as e:
 # connects to the movie_rec db created above and creates a new table
 try:
     mydb = mysql.connect(
-        host="localhost",
-        username="root",
-        password="",
+        host="philadelphiakubicu.tplinkdns.com",
+        username="besa",
+        password="pikachu",
         database="movie_rec"
     )
     if mydb.is_connected():
@@ -41,7 +40,7 @@ try:
         mycursor.execute("CREATE TABLE movies(id INTEGER PRIMARY KEY NOT NULL,"
                          "genres TEXT,"
                          "plot TEXT,"
-                         "release_date DATE NOT NULL,"
+                         "release_date YEAR NOT NULL,"
                          "ratings FLOAT NOT NULL,"
                          "title TEXT NOT NULL)")
 
